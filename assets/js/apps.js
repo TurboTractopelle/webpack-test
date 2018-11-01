@@ -1,6 +1,7 @@
 import log from './log';
 import config from './config';
-import css from '../scss/app.scss';
+import css2 from '../css/app.css';
+//import css from '../scss/app.scss';
 import $ from "jquery";
 
 console.log(config)

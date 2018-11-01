@@ -1,5 +1,6 @@
 const path = require("path");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const dev = process.env.NODE_ENV === "dev ";
 
 let config ={
@@ -24,12 +25,22 @@ let config ={
                   } 
             },
             {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                  fallback: "style-loader",
+                  use: "css-loader"
+                })
+              },
+            {
                 test: /\.scss$/,   
                 use: [ 'style-loader', 'css-loader', 'sass-loader' ]
             }
         ]
     },
-    plugins:[]
+    plugins:[new ExtractTextPlugin({
+        filename: '[name].css',
+        disable:dev
+    }),]
 }
 
 dev ? config.mode = "development" : config.mode = "production";
